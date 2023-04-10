@@ -63,7 +63,7 @@
             {% comment %} </nav> {% endcomment %}
             {% else %}
             <a href="{% url 'login' %}"><span class="primary">Войти</span></a>
-            <a href="./registration.html"
+            <a href="{% url 'register' %}"
             ><span class="secondary">Регистрация</span></a
         >
             {% endif %}
