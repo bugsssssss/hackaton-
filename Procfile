@@ -1,0 +1,1 @@
+web: gunicorn fl_platform.wsgi
