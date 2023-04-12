@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Services
+{% endblock title %}
+{% block content %}
+<section class="twoBlocks__projects">
+  <div class="leftBlock__projects">
+    <div class="buttonsBlock__projects">
+      <a class="primary" href="./project__orders.html">Заказчик</a>
+      <a class="primary activeBtn" href="./project__services.html">Услуги</a>
+      <a class="primary" href="./project__specialists.html">Специалисты</a>
+    </div>
+    <div class="inputBlock__projects">
+      <div class="search">
+        <input type="text" placeholder="Поиск услуг">
+        <span class="secondary">Найти специалиста</span>
+      </div>
+    </div>
+
+    <div class="ordersBlock__projects">
+      {% for i in services %}
+      <div class="orderAllBlock">
+        <div class="orderBlock">
+          <div class="left__orderBlock">
+            <h5>{{i.service_type}}</h5>
+            <div class="nameLogo__orderBlock">
+              <div class="logo__orderBlock">
+                <img src="{% static 'img/Vertical container (1).png' %}" alt="">
+              </div>
+              <div class="name__orderBlock">{{i.owner}}</div>
+            </div>
+          </div>
+          <div class="right__orderBlock">
+            <div class="moneyBtn__orderBlock">
+              <div class="money__orderBlock">
+                <span>от {{i.minimal_price}} сум</span>
+              </div>
+              <div class="btn__orderBlock">
+                <input class="secondary" type="submit" value="Заказать">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="rightBlock__projects">
+    <div class="btn__orderBlock">
+      <a class="secondary" href="./add__t__task.html">Создать задание</a>
+    </div>
+    <div class="services">
+      <h4>Сфера услуг</h4>
+      <form action="" class="form__services">
+        {% for i in categories %}
+        <label for="">
+          <input type="checkbox">
+          {{i.name}}
+        </label>
+        {% endfor %}
+      
+     
+      </form>
+    </div>
+  </div>
+</section>
+<div class="pageNumbers__projects">
+  <a href="#"><img src="./img/Group 11.svg" alt=""></a>
+  <a href="#">1</a>
+  <a class="activeNumber__projects" href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">...</a>
+  <a href="#"><img src="./img/Group 16.svg" alt=""></a>
+</div>
+{% endblock content %}

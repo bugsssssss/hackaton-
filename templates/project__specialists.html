@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Freelancers
+{% endblock title %}
+{% block content %}
+<section class="twoBlocks__projects">
+  <div class="leftBlock__projects">
+    <div class="buttonsBlock__projects">
+      <a class="primary" href="./project__orders.html">Заказчик</a>
+      <a class="primary" href="./project__services.html">Услуги</a>
+      <a class="primary activeBtn" href="./project__specialists.html">Специалисты</a>
+    </div>
+    <div class="inputBlock__projects">
+      <div class="search">
+        <input type="text" placeholder="Поиск услуг">
+        <span class="secondary">Найти специалиста</span>
+      </div>
+    </div>
+
+    <div class="ordersBlock__projects">
+      <div class="orderAllBlock">
+        <div class="orderBlock">
+          <div class="left__orderBlock">
+            <h5>Графический дизайнер</h5>
+            <div class="nameLogo__orderBlock">
+              <div class="logo__orderBlock">
+                <img src="./img/Vertical container (1).png" alt="">
+              </div>
+              <div class="name__orderBlock">А. А. Латышева</div>
+            </div>
+          </div>
+          <div class="right__orderBlock">
+            <div class="moneyBtn__orderBlock">
+              <div class="money__orderBlock">
+                <span>от 300 000 сум</span>
+              </div>
+              <div class="btn__orderBlock">
+                <input class="secondary" type="submit" value="Заказать">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__orderBlock">
+          <p>Я работаю с различными видами дизайна, включая логотипы, брендинг, упаковку, дизайн веб-сайтов, рекламные материалы и многое другое.
+            Если вы хотите, чтобы ваш бренд выделялся на фоне конкуренции, обращайтесь ко мне за помощью. 
+            Я гарантирую, что моя услуга поможет вам достичь успеха и привлечь больше клиентов.
+          </p>
+          <div class="img__orderBlock">
+            <img src="./img/img11.jpg" alt="">
+            <img src="./img/img22.jpg" alt="">
+            <img src="./img/img33.jpg" alt="">
+            <img src="./img/img44.jpg" alt="">
+            <img src="./img/img55.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="orderAllBlock">
+        <div class="orderBlock">
+          <div class="left__orderBlock">
+            <h5>Фотограф</h5>
+            <div class="nameLogo__orderBlock">
+              <div class="logo__orderBlock">
+                <img src="./img/Vertical container (1).png" alt="">
+              </div>
+              <div class="name__orderBlock">Е. Я. Крылова</div>
+            </div>
+          </div>
+          <div class="right__orderBlock">
+            <div class="moneyBtn__orderBlock">
+              <div class="money__orderBlock">
+                <span>от 300 000 сум</span>
+              </div>
+              <div class="btn__orderBlock">
+                <input class="secondary" type="submit" value="Заказать">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__orderBlock">
+          <p>Я предлагаю различные виды фотосессий: свадебные, love-story, семейные, детские и корпоративные. Я подберу для Вас подходящую локацию и помогу с выбором образа, чтобы создать идеальные условия для фотосессии. Я работаю с профессиональным оборудованием и использую только лучшие материалы для печати фотографий.</p>
+          <div class="img__orderBlock">
+            <img src="./img/img66.jpg" alt="">
+            <img src="./img/img77.jpg" alt="">
+            <img src="./img/img88.jpg" alt="">
+            <img src="./img/img99.jpg" alt="">
+            <img src="./img/img1010.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="orderAllBlock">
+        <div class="orderBlock">
+          <div class="left__orderBlock">
+            <h5>Фотограф</h5>
+            <div class="nameLogo__orderBlock">
+              <div class="logo__orderBlock">
+                <img src="./img/Vertical container (1).png" alt="">
+              </div>
+              <div class="name__orderBlock">С. А. Вешняков</div>
+            </div>
+          </div>
+          <div class="right__orderBlock">
+            <div class="moneyBtn__orderBlock">
+              <div class="money__orderBlock">
+                <span>от 300 000 сум</span>
+              </div>
+              <div class="btn__orderBlock">
+                <input class="secondary" type="submit" value="Заказать">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__orderBlock">
+          <p>Все фотографии, которые я делаю, проходят профессиональную обработку, чтобы они стали еще более яркими и насыщенными. 
+            Моя цель - создать для Вас красивые и эмоциональные фотографии, которые будут напоминать о важных моментах Вашей жизни. 
+             Я всегда рад новым знакомствам и готов оказать Вам помощь!
+          </p>
+          <div class="img__orderBlock">
+            <img src="./img/img12.jpg" alt="">
+            <img src="./img/img13.jpg" alt="">
+            <img src="./img/Image (5) (1).jpg" alt="">
+            <img src="./img/Image (3) (1).jpg" alt="">
+            <img src="./img/Image (1) (1).jpg" alt="">
+            <img src="" alt="">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="rightBlock__projects">
+    <div class="btn__orderBlock">
+      <a class="secondary" href="./add__t__task.html">Создать задание</a>
+    </div>
+    <div class="services">
+      <h4>Сфера услуг</h4>
+      <form action="" class="form__services">
+        <label for="">
+          <input type="checkbox">
+          Дизайн
+        </label>
+        <label for="">
+          <input type="checkbox">
+          Разработка, IT
+        </label>
+        <label for="">
+          <input type="checkbox">
+          SMM, реклама
+        </label>
+        <label for="">
+          <input type="checkbox">
+          Аудио, Видео
+        </label>
+        <label for="">
+          <input type="checkbox">
+          Бизнес
+        </label>
+        <label for="">
+          <input type="checkbox">
+          Маркетинг
+        </label>
+        <label for="">
+          <input type="checkbox">
+          Тестирование
+        </label>
+      </form>
+    </div>
+  </div>
+</section>
+<div class="pageNumbers__projects">
+  <a href="#"><img src="./img/Group 11.svg" alt=""></a>
+  <a href="#">1</a>
+  <a class="activeNumber__projects" href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">...</a>
+  <a href="#"><img src="./img/Group 16.svg" alt=""></a>
+</div>
+
+{% endblock content %}
+
