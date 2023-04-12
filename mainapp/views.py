@@ -71,4 +71,33 @@ def register(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
+
+
+def project_page(request):
+    orders = Order.objects.all()
+    catefories = Category.objects.all()
+    context = {
+        'orders': orders,
+        'categories': catefories
+    }
+    return render(request, 'project__orders.html', context)
+
+
+def services_page(request):
+    services = Service.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'services': services,
+        'categories': categories
+    }
+    return render(request, 'project__services.html', context)
+
+
+# def freelancers_page(request):
+     
+#      = CustomUser.objects.all()
+#     context = {
+#         'freelancers': freelancers
+#     }
+#     return render(request, 'project__freelancers.html', context)

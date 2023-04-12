@@ -81,18 +81,21 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'mainapp.validators.CustomPasswordValidator',
+    # },
 ]
 
 
@@ -136,6 +139,8 @@ AUTHENTICATION_BACKENDS = [
     # # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
     'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2'
 ]
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
@@ -143,3 +148,7 @@ SITE_ID = 1
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '806838719990-i65be3vgtlj9q5lc3fpfv0ec6pellvp5.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '3456439644617573'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c03d827e9e3f539804b7ea71f49c1ca4'
