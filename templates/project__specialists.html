@@ -7,179 +7,126 @@ Freelancers
 <section class="twoBlocks__projects">
   <div class="leftBlock__projects">
     <div class="buttonsBlock__projects">
-      <a class="primary" href="./project__orders.html">Заказчик</a>
-      <a class="primary" href="./project__services.html">Услуги</a>
-      <a class="primary activeBtn" href="./project__specialists.html">Специалисты</a>
+      <a class="primary" href="{% url 'projects' %}">Заказы</a>
+      <a class="primary" href="{% url 'services' %}">Услуги</a>
+      <a class="primary activeBtn" href="{% url 'freelancers' %}">Специалисты</a>
     </div>
     <div class="inputBlock__projects">
-      <div class="search">
-        <input type="text" placeholder="Поиск услуг">
-        <span class="secondary">Найти специалиста</span>
-      </div>
+      <form action="" method='GET'>
+        <div class="search">
+          <input type="text" placeholder="Поиск" name='query'>
+
+          <input class="secondary" type="submit" value='Найти специалиста' style="width: 188px; text-align:center;">
+        </div>
+      </form>
     </div>
-
     <div class="ordersBlock__projects">
+      {% for i in freelancers %}
+      {% if i != request.user %}
       <div class="orderAllBlock">
         <div class="orderBlock">
           <div class="left__orderBlock">
-            <h5>Графический дизайнер</h5>
+            <h5>{{i.specialization}}</h5>
             <div class="nameLogo__orderBlock">
               <div class="logo__orderBlock">
-                <img src="./img/Vertical container (1).png" alt="">
+                <img src="{% static 'img/Vertical container (1).png' %}" alt="">
               </div>
-              <div class="name__orderBlock">А. А. Латышева</div>
+              <div class="name__orderBlock">
+                {% if i.first_name %}
+                {{i.first_name}}
+                {% else %}
+                {{i.username}}
+                {% endif %}
+              </div>
             </div>
           </div>
           <div class="right__orderBlock">
             <div class="moneyBtn__orderBlock">
               <div class="money__orderBlock">
-                <span>от 300 000 сум</span>
+                <span>от {{i.minimal_price}} сум</span>
               </div>
               <div class="btn__orderBlock">
-                <input class="secondary" type="submit" value="Заказать">
+                <a class="secondary" href='{% url "chat-with-freelancer" i.username %}'>Заказать</a>
               </div>
             </div>
           </div>
         </div>
         <div class="about__orderBlock">
-          <p>Я работаю с различными видами дизайна, включая логотипы, брендинг, упаковку, дизайн веб-сайтов, рекламные материалы и многое другое.
-            Если вы хотите, чтобы ваш бренд выделялся на фоне конкуренции, обращайтесь ко мне за помощью. 
-            Я гарантирую, что моя услуга поможет вам достичь успеха и привлечь больше клиентов.
+          <p>
+            {{i.service_info}}
           </p>
           <div class="img__orderBlock">
-            <img src="./img/img11.jpg" alt="">
-            <img src="./img/img22.jpg" alt="">
-            <img src="./img/img33.jpg" alt="">
-            <img src="./img/img44.jpg" alt="">
-            <img src="./img/img55.jpg" alt="">
+           {% if i.service_image1 %}
+           <img class='serviceImg' src="{{i.service_image1.url}}" alt="">
+           <img class='serviceImg' src="{{i.service_image2.url}}" alt="">
+           <img class='serviceImg' src="{{i.service_image3.url}}" alt="">
+           {% else %}
+           {% endif %}
           </div>
         </div>
-      </div>
-
-      <div class="orderAllBlock">
-        <div class="orderBlock">
-          <div class="left__orderBlock">
-            <h5>Фотограф</h5>
-            <div class="nameLogo__orderBlock">
-              <div class="logo__orderBlock">
-                <img src="./img/Vertical container (1).png" alt="">
-              </div>
-              <div class="name__orderBlock">Е. Я. Крылова</div>
-            </div>
-          </div>
-          <div class="right__orderBlock">
-            <div class="moneyBtn__orderBlock">
-              <div class="money__orderBlock">
-                <span>от 300 000 сум</span>
-              </div>
-              <div class="btn__orderBlock">
-                <input class="secondary" type="submit" value="Заказать">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="about__orderBlock">
-          <p>Я предлагаю различные виды фотосессий: свадебные, love-story, семейные, детские и корпоративные. Я подберу для Вас подходящую локацию и помогу с выбором образа, чтобы создать идеальные условия для фотосессии. Я работаю с профессиональным оборудованием и использую только лучшие материалы для печати фотографий.</p>
-          <div class="img__orderBlock">
-            <img src="./img/img66.jpg" alt="">
-            <img src="./img/img77.jpg" alt="">
-            <img src="./img/img88.jpg" alt="">
-            <img src="./img/img99.jpg" alt="">
-            <img src="./img/img1010.jpg" alt="">
-          </div>
-        </div>
-      </div>
-
-      <div class="orderAllBlock">
-        <div class="orderBlock">
-          <div class="left__orderBlock">
-            <h5>Фотограф</h5>
-            <div class="nameLogo__orderBlock">
-              <div class="logo__orderBlock">
-                <img src="./img/Vertical container (1).png" alt="">
-              </div>
-              <div class="name__orderBlock">С. А. Вешняков</div>
-            </div>
-          </div>
-          <div class="right__orderBlock">
-            <div class="moneyBtn__orderBlock">
-              <div class="money__orderBlock">
-                <span>от 300 000 сум</span>
-              </div>
-              <div class="btn__orderBlock">
-                <input class="secondary" type="submit" value="Заказать">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="about__orderBlock">
-          <p>Все фотографии, которые я делаю, проходят профессиональную обработку, чтобы они стали еще более яркими и насыщенными. 
-            Моя цель - создать для Вас красивые и эмоциональные фотографии, которые будут напоминать о важных моментах Вашей жизни. 
-             Я всегда рад новым знакомствам и готов оказать Вам помощь!
-          </p>
-          <div class="img__orderBlock">
-            <img src="./img/img12.jpg" alt="">
-            <img src="./img/img13.jpg" alt="">
-            <img src="./img/Image (5) (1).jpg" alt="">
-            <img src="./img/Image (3) (1).jpg" alt="">
-            <img src="./img/Image (1) (1).jpg" alt="">
-            <img src="" alt="">
-          </div>
-        </div>
-      </div>
-
+      </div>      
+      {% endif %}
+      {% endfor %}
+      <h2 class='emptyHeading' 
+      style=
+      'text-align:center;
+      font-size: 24px;
+      font-weight: 500;
+      margin-top: 50px;
+      '>{{not_found}}</h2>
     </div>
   </div>
   <div class="rightBlock__projects">
-    <div class="btn__orderBlock">
+    {% comment %} <div class="btn__orderBlock">
       <a class="secondary" href="./add__t__task.html">Создать задание</a>
-    </div>
+    </div> {% endcomment %}
     <div class="services">
       <h4>Сфера услуг</h4>
       <form action="" class="form__services">
+        {% for i in categories %}
         <label for="">
           <input type="checkbox">
-          Дизайн
+          {{i.name}}
         </label>
-        <label for="">
-          <input type="checkbox">
-          Разработка, IT
-        </label>
-        <label for="">
-          <input type="checkbox">
-          SMM, реклама
-        </label>
-        <label for="">
-          <input type="checkbox">
-          Аудио, Видео
-        </label>
-        <label for="">
-          <input type="checkbox">
-          Бизнес
-        </label>
-        <label for="">
-          <input type="checkbox">
-          Маркетинг
-        </label>
-        <label for="">
-          <input type="checkbox">
-          Тестирование
-        </label>
+        {% endfor %}
       </form>
     </div>
   </div>
 </section>
-<div class="pageNumbers__projects">
-  <a href="#"><img src="./img/Group 11.svg" alt=""></a>
-  <a href="#">1</a>
-  <a class="activeNumber__projects" href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">...</a>
-  <a href="#"><img src="./img/Group 16.svg" alt=""></a>
+{% if freelancers %}
+<div class="pagination pageNumbers__projects" style='gap: 20px;'>
+  {% comment %} <span class="step-links"> {% endcomment %}
+      {% if freelancers.has_previous %}
+          {% comment %} <a href="?page=1">&laquo; first</a> {% endcomment %}
+          <a href="?page={{ freelancers.previous_page_number }}">{{freelancers.previous_page_number}}</a>
+      {% endif %}
+
+      <span class="current-page">
+          {% comment %} Page {{ freelancers.number }} of {{ freelancers.paginator.num_pages }} {% endcomment %}
+          {% if freelancers.paginator.num_pages == 1 %}
+          <a class='activeNumber__projects' style='text-align:center;'>
+            1
+          </a>
+          {% else %}
+          <a class='activeNumber__projects' style='text-align:center;'>
+            {{ freelancers.number }}
+          </a>
+          {% endif %}
+      </span>
+      {% if freelancers.has_next %}
+      {% if freelancers.paginator.num_pages <= 2 %}
+      <a href="?page={{ freelancers.next_page_number }}">{{freelancers.next_page_number}}</a>
+      {% else %}
+      <a href="?page={{ freelancers.paginator.num_pages }}">{{freelancers.paginator.num_pages}}</a>
+      {% endif %}
+          {% comment %} <span>....</span>
+          <a href="?page={{ orders.paginator.num_pages }}">{{orders.paginator.num_pages}}</a> {% endcomment %}
+      {% endif %}
+  {% comment %} </span> {% endcomment %}
 </div>
+{% endif %}
+
+
 
 {% endblock content %}
 

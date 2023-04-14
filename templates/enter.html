@@ -35,7 +35,7 @@
       <span>Войти с помощью</span>
       <div class="enterWithIcons">
         <a href="{% url 'social:begin' 'google-oauth2' %}"><img src="{% static 'img/google.svg' %}" alt="" /></a>
-        <a href="#"><img src="{% static 'img/discord.svg' %}" alt="" /></a>
+        {% comment %} <a href="#"><img src="{% static 'img/discord.svg' %}" alt="" /></a> {% endcomment %}
         <a href="{% url 'social:begin' 'facebook' %}"><img src="{% static 'img/facebook.svg' %}" alt="" /></a>
       </div>
     </div>

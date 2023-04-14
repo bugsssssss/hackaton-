@@ -5,14 +5,29 @@
 <!-- window1 -->
 <section>
     <div class="wOne">
+        {% if request.user.user_type_id == 1 %}
+        <div class="wOneOne">
+            <h2>Вы можете найти лучшие заказы в сфере фриланса.</h2>
+            <p>это современная онлайн-платформа, которая предоставляет услуги как для тех, кто ищет работу, так и для работодателей</p>
+            <div class="search">
+                <form action="" method='GET'>
+                    <input type="text" placeholder="Разработка" name='query' class='queryOrder'>
+                    <input type='submit' class="secondary" value='Найти заказы'>
+                </form>
+            </div>
+        </div>
+        {% else %}
         <div class="wOneOne">
             <h2>Вы можете найти лучшие предложения по работе в сфере фриланса для вашего бизнеса.</h2>
             <p>это современная онлайн-платформа, которая предоставляет услуги как для тех, кто ищет работу, так и для работодателей</p>
             <div class="search">
-                <input type="text" placeholder="Программист">
-                <span class="secondary">Найти специалиста</span>
+                <form action="" method="GET">
+                    <input type="text" placeholder='Программист' name='query' class='queryOrder'>
+                    <input type='submit' class="secondary" value='Найти специалиста'>
+                </form>
             </div>
         </div>
+        {% endif %}
         <div class="wOneTwo">
             <img src="{% static 'img/creative-wOne.png' %}" alt="">
             <img src="{% static 'img/girl-wOne.png' %}" alt="">
@@ -55,14 +70,22 @@
     <div class="wThree">
         <h2>Категории услуг</h2>
         <div class="wThreeFlex">
-            <div class="wThreeFlexChild">
-                <div class="wThreeFlexImg">
-                    <img src="{% static 'img/w3-1.svg' %}" alt="">
-                    <h3>Дизайн</h3>
-                </div>
-                <span>Лендинги, многстраничники, SMM и т. д.</span>
-            </div>
-            <div class="wThreeFlexChild">
+            {% for i in categories %}
+            <a href="{% url 'projects' %}" style='display: block; color: #fff;' class='wThreeFlexChild'>
+                {% comment %} <div class="wThreeFlexChild"> {% endcomment %}
+                    <div class="wThreeFlexImg">
+                        {% if i.picture %}
+                        <img src="{{i.picture.url}}" alt="">
+                        {% endif %}
+                        <h3>{{i.name}}</h3>
+                    </div>
+                    <span>{{i.subtitle}}</span>
+            {% comment %} </div> {% endcomment %}
+            </a>
+          
+            {% endfor %}
+      
+            {% comment %} <div class="wThreeFlexChild">
                 <div class="wThreeFlexImg">
                     <img src="{% static 'img/w3-2.svg' %}" alt="">
                     <h3>Разработка, IT</h3>
@@ -96,7 +119,7 @@
                     <h3>Производство</h3>
                 </div>
                 <span>Автоматизация производства, сварка и т. д.</span>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </section>

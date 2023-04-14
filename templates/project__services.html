@@ -7,19 +7,23 @@ Services
 <section class="twoBlocks__projects">
   <div class="leftBlock__projects">
     <div class="buttonsBlock__projects">
-      <a class="primary" href="./project__orders.html">Заказчик</a>
-      <a class="primary activeBtn" href="./project__services.html">Услуги</a>
-      <a class="primary" href="./project__specialists.html">Специалисты</a>
+      <a class="primary" href="{% url 'projects' %}">Заказы</a>
+      <a class="primary activeBtn" href="{% url 'services' %}">Услуги</a>
+      <a class="primary" href="{% url 'freelancers' %}">Специалисты</a>
     </div>
     <div class="inputBlock__projects">
-      <div class="search">
-        <input type="text" placeholder="Поиск услуг">
-        <span class="secondary">Найти специалиста</span>
-      </div>
+      <form action="" method='GET'>
+        <div class="search">
+          <input type="text" placeholder="Поиск" name='query'>
+
+          <input class="secondary" type="submit" value='Найти услугу' style="width: 188px; text-align:center;">
+        </div>
+      </form>
     </div>
 
     <div class="ordersBlock__projects">
       {% for i in services %}
+      {% if i.owner != request.user %}
       <div class="orderAllBlock">
         <div class="orderBlock">
           <div class="left__orderBlock">
@@ -30,6 +34,14 @@ Services
               </div>
               <div class="name__orderBlock">{{i.owner}}</div>
             </div>
+            <div class="img__orderBlock" style='margin-top: 25px;'>
+              {% if i.image1 %}
+            <img class='serviceImg' src="{{i.image1.url}}" alt="">
+            <img class='serviceImg' src="{{i.image2.url}}" alt="">
+            <img class='serviceImg' src="{{i.image3.url}}" alt="">
+            {% else %}
+            {% endif %}
+             </div>
           </div>
           <div class="right__orderBlock">
             <div class="moneyBtn__orderBlock">
@@ -37,19 +49,28 @@ Services
                 <span>от {{i.minimal_price}} сум</span>
               </div>
               <div class="btn__orderBlock">
-                <input class="secondary" type="submit" value="Заказать">
+                <a class="secondary" href='{% url "chat" i.id %}'>Заказать</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
       {% endfor %}
+      
     </div>
+    <h2 class='emptyHeading' 
+    style=
+    'text-align:center;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 50px;
+    '>{{not_found}}</h2>
   </div>
   <div class="rightBlock__projects">
-    <div class="btn__orderBlock">
+    {% comment %} <div class="btn__orderBlock">
       <a class="secondary" href="./add__t__task.html">Создать задание</a>
-    </div>
+    </div> {% endcomment %}
     <div class="services">
       <h4>Сфера услуг</h4>
       <form action="" class="form__services">
@@ -65,15 +86,37 @@ Services
     </div>
   </div>
 </section>
-<div class="pageNumbers__projects">
-  <a href="#"><img src="./img/Group 11.svg" alt=""></a>
-  <a href="#">1</a>
-  <a class="activeNumber__projects" href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">...</a>
-  <a href="#"><img src="./img/Group 16.svg" alt=""></a>
+{% if services %}
+<div class="pagination pageNumbers__projects" style='gap: 20px;'>
+  {% comment %} <span class="step-links"> {% endcomment %}
+      {% if services.has_previous %}
+          {% comment %} <a href="?page=1">&laquo; first</a> {% endcomment %}
+          <a href="?page={{ services.previous_page_number }}">{{services.previous_page_number}}</a>
+      {% endif %}
+
+      <span class="current-page">
+          {% comment %} Page {{ services.number }} of {{ services.paginator.num_pages }} {% endcomment %}
+          {% if services.paginator.num_pages == 1 %}
+          <a class='activeNumber__projects' style='text-align:center;'>
+            1
+          </a>
+          {% else %}
+          <a class='activeNumber__projects' style='text-align:center;'>
+            {{ services.number }}
+          </a>
+          {% endif %}
+      </span>
+      {% if services.has_next %}
+      {% if services.paginator.num_pages <= 2 %}
+      <a href="?page={{ services.next_page_number }}">{{services.next_page_number}}</a>
+      {% else %}
+      <a href="?page={{ services.paginator.num_pages }}">{{services.paginator.num_pages}}</a>
+      {% endif %}
+          {% comment %} <span>....</span>
+          <a href="?page={{ orders.paginator.num_pages }}">{{orders.paginator.num_pages}}</a> {% endcomment %}
+      {% endif %}
+  {% comment %} </span> {% endcomment %}
 </div>
+{% endif %}
+
 {% endblock content %}

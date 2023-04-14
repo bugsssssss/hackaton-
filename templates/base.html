@@ -15,8 +15,8 @@
 				<div class="pages">
 					<a href="{% url 'index' %}"><span>Главная</span></a>
 					<a href="{% url 'projects' %}"><span>Проекты</span></a>
-					<a href=""><span>Специалисты</span></a>
-					<a href="#"><span>Помощь</span></a>
+					<a href="{% url 'freelancers' %}"><span>Специалисты</span></a>
+					<a href="{% url 'error' %}"><span>Помощь</span></a>
 				</div>
 				<div class="menu-btn">
 					<span></span>
@@ -28,8 +28,9 @@
 						<ul>
 						<li><a href="./index.html">Главная</a></li>
 						<li><a href="{% url 'projects' %}">Проекты</a></li>
-						<li><a href="./project__specialists.html">Специалисты</a></li>
-						<li><a href="#">Помощь</a></li>
+						<li><a href="{% url 'freelancers' %}">Специалисты</a></li>
+						<li><a href="{% url 'error' %}"><span>Помощь</span></a>
+						</li>
 						</ul>
 					</div>
 				</div>
@@ -51,14 +52,18 @@
 			{% if user.is_authenticated %}
 			{{user.username}}
 			<div class="headBtnOneAnother">
-				<a href="#"><img src="{% static 'img/message.svg' %}" alt=""></a> 
+				<a href=""><img src="{% static 'img/message.svg' %}" alt=""></a> 
 				<a href="#"><img src="{% static 'img/bulb.svg' %}" alt=""></a>
 				<a class="userMenu" href="#"><img src="{% static 'img/user.svg' %}" alt=""></a>
 				<div class="userMenuWindow none">
-					<a href=""><span>Профиль</span></a>
-					<a href=""><span>Мои Заказы</span></a>
+					<a href="{% url 'profile' request.user.id %}"><span>Профиль</span></a>
+					{% if request.user.user_type_id.id == 1 %}
+					<a href="{% url 'my-orders-freelancer' 'pending' %}"><span>Мои Заказы</span></a>
+					{% else %}
+					<a href="{% url 'my-orders' 'pending' %}"><span>Мои Заказы</span></a>
+					{% endif %}
 					<a href=""><span>Личный кабинет</span></a>
-					<a href=""><span>Мой кошелек</span></a>
+					<a href="{% url 'wallet' %}"><span>Мой кошелек</span></a>
 					<a href=""><span>Настройки</span></a>
 					<a href="{% url 'logout' %}"><span>Выйти</span></a>
 				</div>

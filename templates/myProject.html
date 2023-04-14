@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My orders - {{ user.username }}
+{% endblock title %}
+{% block content %}
+<section class="twoBlocks__projects">
+      <div class="leftBlock__projects">
+        <div class="buttonsBlock__projects">
+          {% if page == "pending" %}
+          <a class="btnClass primary activeBtn" href="{% url 'my-orders' 'pending' %}">Вcе</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'in_progress' %}">В процессе</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'completed' %}">Завершено</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'canceled' %}">Отменено</a>
+          {% elif page == 'in_progress' %}
+          <a class="btnClass primary " href="{% url 'my-orders' 'pending' %}">Вcе</a>
+          <a class="btnClass primary activeBtn" href="{% url 'my-orders' 'in_progress' %}">В процессе</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'completed' %}">Завершено</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'canceled' %}">Отменено</a>
+          {% elif page == 'completed' %}
+          <a class="btnClass primary " href="{% url 'my-orders' 'pending' %}">Вcе</a>
+          <a class="btnClass primary " href="{% url 'my-orders' 'in_progress' %}">В процессе</a>
+          <a class="btnClass primary activeBtn"  href="{% url 'my-orders' 'completed' %}">Завершено</a>
+          <a class="btnClass primary" href="{% url 'my-orders' 'canceled' %}">Отменено</a>
+          {% elif page == 'canceled'%}
+          <a class="btnClass primary " href="{% url 'my-orders' 'pending' %}">Вcе</a>
+          <a class="btnClass primary " href="{% url 'my-orders' 'in_progress' %}">В процессе</a>
+          <a class="btnClass primary "  href="{% url 'my-orders' 'completed' %}">Завершено</a>
+          <a class="btnClass primary activeBtn" href="{% url 'my-orders' 'canceled' %}">Отменено</a>
+          {% endif %}
+       
+         
+        </div>
+        {% if orders %}
+        <div class="inputBlock__projects">
+          <form action="" method='GET'>
+            <div class="search">
+              <input type="text" placeholder="Поиск" name='query' >
+    
+              <input class="secondary" type="submit" value='Найти' style="width: 188px; text-align:center;">
+            </div>
+          </form>
+        </div>
+        {% endif %}
+    
+        <div class="ordersBlock__projects">
+          {% for i in orders %}
+          <div class="orderAllBlock">
+            <div class="orderBlock">
+              <div class="left__orderBlock">
+                <h5>{{i.title}}</h5>
+                <div class="nameLogo__orderBlock">
+                  <div class="logo__orderBlock">
+                    <img src="{% static 'img/Vertical container (1).png' %}" alt="">
+                  </div>
+                  <div class="name__orderBlock">
+                    {% if i.owner.first_name %}
+                    {{i.owner.first_name}}
+                    {% else %}
+                    {{i.owner.username}}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="right__orderBlock">
+                <div class="moneyBtn__orderBlock">
+                  <div class="money__orderBlock">
+                    <span>{{i.budget}} сум</span>
+                    <div class="views__orderBlock">
+                      <div class="eyeLogo__orderBlock">
+                        <img src="./img/fi-rr-eye (1).png" alt="">
+                      </div>
+                      <span>{{i.views}} просмотра</span>
+                    </div>
+                  </div>
+                  <div class="btn__orderBlock">
+                    <a href="{% url 'project-detail' i.pk %}"><input class="secondary" type="submit" value="Подробнее"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+          {% endfor %}
+
+      
+        </div>
+      </div>
+      
+    </section>
+    {% if orders %}
+    <div class="pagination pageNumbers__projects" style='gap: 20px;'>
+      {% comment %} <span class="step-links"> {% endcomment %}
+          {% if orders.has_previous %}
+              {% comment %} <a href="?page=1">&laquo; first</a> {% endcomment %}
+              <a href="?page={{ orders.previous_page_number }}">{{orders.previous_page_number}}</a>
+          {% endif %}
+    
+          <span class="current-page">
+              {% comment %} Page {{ orders.number }} of {{ orders.paginator.num_pages }} {% endcomment %}
+              {% if orders.paginator.num_pages == 1 %}
+              <a class='activeNumber__projects' style='text-align:center;'>
+                1
+              </a>
+              {% else %}
+              <a class='activeNumber__projects' style='text-align:center;'>
+                {{ orders.number }}
+              </a>
+              {% endif %}
+          </span>
+          {% if orders.has_next %}
+          {% if orders.paginator.num_pages <= 2 %}
+          <a href="?page={{ orders.next_page_number }}">{{orders.next_page_number}}</a>
+          {% else %}
+          <a href="?page={{ orders.paginator.num_pages }}">{{orders.paginator.num_pages}}</a>
+          {% endif %}
+              {% comment %} <span>....</span>
+              <a href="?page={{ orders.paginator.num_pages }}">{{orders.paginator.num_pages}}</a> {% endcomment %}
+          {% endif %}
+      {% comment %} </span> {% endcomment %}
+    </div>
+    {% else %}
+    <h2 class='emptyHeading' 
+    style=
+    'text-align:center;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 50px;
+    '>Здесь пока ничего нет</h2>
+    {% endif %}
+{% endblock content %}

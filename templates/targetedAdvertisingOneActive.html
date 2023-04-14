@@ -6,6 +6,11 @@ Order: {{order.title|truncatewords:2}}
 {% block content %}
 <main class="mainAboutPage">
     <div class="mainLeft">
+        {% comment %} <a href="./project__orders.html"><h1>Все проекты</h1></a> {% endcomment %}
+        {% comment %} <div class="targetBnt">
+            <a class="btnClass primary " href="{% url 'my-orders-freelancer' 'in_progress' %}">Активные</a>
+            <a class="btnClass primary" href="{% url 'my-orders-freelancer' 'canceled' %}">Архив</a>  
+        </div> {% endcomment %}
         <p class="maiAabout">Описание проекта</p>
         <h2>{{order.title}}</h2>
         <div class="mainPrice">
@@ -19,10 +24,52 @@ Order: {{order.title|truncatewords:2}}
         <div class="mainSpan">
             <span>{{order.description}}</span>
         </div>
+        <p class="maiAabout">Оставить отзыв</p>
+        <div class="targetStars">
+            <img class="starOne" src="{% static 'img/star.svg' %}" alt="">
+            <img class="starTwo" src="{% static 'img/star.svg' %}" alt="">
+            <img class="starThree" src="{% static 'img/star.svg' %}" alt="">
+            <img class="starFour" src="{% static 'img/star.svg' %}" alt="">
+            <img class="starFive" src="{% static 'img/star.svg' %}" alt="">
+        </div>
+        {% if feedback.is_published %}
+        {% comment %} <div class="messagesServesLeft"> {% endcomment %}
+            <div class="senderData" style='display:flex; align-items:center; gap:15px '>
+                {% if feedback.sender.image %}
+                <img class="faceUser" src="{{feedback.sender.image.url}}" alt="">
+                {% endif %}
+                <span>
+                    {% if feedback.sender.first_name %}
+                    {{feedback.sender.first_name}}</span>
+                    {% else %}
+                    {{feedback.sender.username}}</span>
+                    {% endif %}
+            </div>
+            <div class='feedback'>
+                <span style='display:block; font-size: 18px; font-weight: 600; padding:20px; border: 2px solid var(--blue);
+                border-radius: 0.5em; margin-top: 15px;'>{{feedback.feedback}}</span>
+                <br>
+                <span style="font-size: 16px; ">{{feedback.created_at|timesince}} ago</span>
+            </div>
+        {% comment %} </div> {% endcomment %}
+        {% else %}
+        <div class="messagesServesLeft">
+            <div>
+            </div>
+            <form action="" method='POST'>
+                {% csrf_token %}
+                <input type="text" name="feedback" id="userText" placeholder="Напишите что нибудь">
+            </form>
+            <a href=""><img class="inputFileSend" src="{% static 'img/fileInput.svg' %}" alt=""></a>
+            <a href=""><img class="inputSpeak" src="{% static 'img/mycrophoneInput.svg' %}" alt=""></a>
+        </div>
+        {% endif %}
+        <div class="targetBnt">
+            <a href="{% url 'my-orders-completed' order.id %}"><span class="secondary target">Выполнено</span></a> 
+            <a href="{% url 'my-orders-canceled' order.id %}"><span class="primary target">Не выполнено</span></a>
+        </div>
         {% if request.user == order.owner %}
         <a href="{% url 'chat' order.id %}"><input class="secondary" type="submit" value="Редактировать"></a>
-        {% else %}
-        <a href="{% url 'chat' order.id %}"><input class="secondary" type="submit" value="Откликнутся"></a>
         {% endif %}
     </div>
     <div class="mainRightTarget target">

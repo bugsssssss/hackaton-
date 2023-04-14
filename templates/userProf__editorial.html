@@ -1,235 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>User__profile__editorial</title>
-</head>
-<body>
-    <header>
-        <div class="headerLeft">
-            <img src="./img/logo.svg" alt="">
-            <div class="pages">
-                <a href="./index.html"><span>Главная</span></a>
-                <a href="./project__orders.html"><span>Проекты</span></a>
-                <a href="./project__specialists.html"><span>Специалисты</span></a>
-                <a href="#"><span>Помощь</span></a>
-            </div>
-            <div class="menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="menu">
-                <div>
-                    <ul>
-                    <li><a href="./index.html">Главная</a></li>
-                    <li><a href="./project__orders.html">Проекты</a></li>
-                    <li><a href="./project__specialists.html">Специалисты</a></li>
-                    <li><a href="#">Помощь</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="headerRight">
-            <div class="lang">
-                <div class="langRu">
-                    <img src="./img/lang.svg" alt="">
-                    <span>ru</span>
-                    <img src="./img/arrow.svg" alt=""> 
-                </div>
-                <div class="langUz">
-                    <img src="./img/lang.svg" alt="">
-                    <span>uz</span>
-                </div>
-            </div>
-        </div>
-        <div class="headBtnOne">
-            <a href="./enter.html"><span class="primary">Вход</span></a>
-            <a href="./registration.html"><span class="secondary">Регистрация</span></a>  
-        </div>
-        <div class="headBtnOneAnother">
-            <a href="#"><img src="./img/message.svg" alt=""></a> 
-            <a href="#"><img src="./img/bulb.svg" alt=""></a>
-            <a class="userMenu" href="#"><img src="./img/user.svg" alt=""></a>
-            <div class="userMenuWindow none">
-                <a href=""><span>Профиль</span></a>
-                <a href=""><span>Мои Заказы</span></a>
-                <a href=""><span>Личный кабинет</span></a>
-                <a href=""><span>Мой кошелек</span></a>
-                <a href=""><span>Настройки</span></a>
-                <a href=""><span>Выйти</span></a>
-            </div>
-        </div>
-    </header>
-
-  <!-- Windows__user__profile -->
-
-  <section class="userProfile__profile">
-    <h2>Мой профиль</h2>
-    <div class="mainSection__profile">
-      <div class="imgMain__profile">
-        <img src="./img/Switch (1).jpg" alt="">
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My profile
+{% endblock title %}
+{% block content %}
+<section class="userProfile__profile">
+<form action="{% url 'profile' request.user.id %}" method="POST">
+  {% csrf_token %}
+  <h2>Мой профиль</h2>
+  <div class="mainSection__profile">
+    <div class="imgMain__profile">
+      <img src="{% static 'img/Switch (1).jpg' %}" alt="">
+    </div>
+    <div class="nameMain__profile">
+      <div class="nameStarsMain__profile">
+        {% if user.first_name and user.last_name %}
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        {% elif user.first_name %}
+        <h2>{{user.first_name}}</h2>
+        {{form.last_name}}
+        {% else %}
+        <br>
+        {{form.username}}
+        {{form.first_name}}
+        {{form.last_name}}
+        {% endif %}
+        {% comment %} <div class="starsMain__profile">
+          <img src="./img/fi-rr-star (1).png" alt="">
+          <img src="./img/fi-rr-star (1).png" alt="">
+          <img src="./img/fi-rr-star (1).png" alt="">
+          <img src="./img/fi-rr-star (1).png" alt="">
+          <img src="./img/fi-rr-star (1).png" alt="">
+        </div> {% endcomment %}
       </div>
-      <div class="nameMain__profile">
-        <div class="nameStarsMain__profile">
-          <h2>Е. И. Пономарева</h2>
-          <div class="starsMain__profile">
-            <img src="./img/fi-rr-star (1).png" alt="">
-            <img src="./img/fi-rr-star (1).png" alt="">
-            <img src="./img/fi-rr-star (1).png" alt="">
-            <img src="./img/fi-rr-star (1).png" alt="">
-            <img src="./img/fi-rr-star (1).png" alt="">
-          </div>
-        </div>
-        <div class="locationMain__profile">
-          <img src="./img/fi-rr-marker (1).png" alt="">
-          <span>Ташкент, Узбекистан</span>
-        </div>
+      <div class="locationMain__profile">
+        <img src="{% static 'img/fi-rr-marker (1).png' %}" alt="">
+        {{form.city}}
+        {{form.country}}
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <section class="dateEmailNum__profile">
-    <div class="date__profile">
-      <h5>Дата рождения</h5>
-      <span>29.11.2001</span>
-    </div>
-    <div class="date__profile">
-      <h5>Email</h5>
-      <a href="mailto:Ponamareva@gmail.com"><span>Ponamareva@gmail.com</span></a>
-    </div>
-    <div class="date__profile">
-      <h5>Номер рабочего телефона</h5>
-      <a href="tel:+998901234567"><span>+ 998 90 123 45 67</span></a>
-    </div>
-  </section>
+<section class="dateEmailNum__profile">
+  <div class="date__profile">
+    <h5>Дата рождения</h5>
+    <span>{{form.date_of_birth}}</span>
+  </div>
+  <div class="date__profile">
+    <h5>Email</h5>
+    <a href="mailto:Ponamareva@gmail.com"><span>{{user.email}}</span></a>
+  </div>
+  <div class="date__profile">
+    <h5>Номер рабочего телефона</h5>
+    {% comment %} <a href="tel:+998901234567"><span>{{form.phone_number1}}</span></a> {% endcomment %}
+    {{form.phone_number1}}
+  </div>
+</section>
 
-  <section class="experienceLanguages__profile">
-    <div class="expLangs__profile">
-      <div class="h5__with__pancil">
-        <h5>Опыт работы</h5>
-        <img src="./img/fi-rr-pencil (1).png" alt="">
-      </div>
-      <div class="exp__profile">
-        <span>Studio, старший дизайнер UX/UI</span>
-        <span>2019-2023</span>
-      </div>
-      <hr>
-      <div class="exp__profile">
-        <span>Studio, младший дизайнер UX/UI</span>
-        <span>2014-2019</span>
-      </div>
-    </div>
-    <div class="expLangs__profile">
-      <div class="h5__with__pancil">
-        <h5>Языки</h5>
-        <img src="./img/fi-rr-pencil (1).png" alt="">
-      </div>
-      <div class="lang__profile">
-        <span>Русский</span>
-        <span>Родной</span>
-      </div>
-      <hr>
-      <div class="lang__profile">
-        <span>Узбекский</span>
-        <span>Родной</span>
-      </div>
-      <hr>
-      <div class="lang__profile">
-        <span>Английский</span>
-        <span>Продвинутый </span>
-      </div>
-    </div>
-  </section>
-
-  <section class="inform__profile">
+<section class="experienceLanguages__profile">
+  {% comment %} <div class="expLangs__profile">
     <div class="h5__with__pancil">
-      <h5>Информация о Е. И. Пономарева</h5>
+      <h5>Опыт работы</h5>
       <img src="./img/fi-rr-pencil (1).png" alt="">
     </div>
-    <p>Я работаю с различными видами дизайна, включая логотипы, брендинг, упаковку, дизайн веб-сайтов, рекламные материалы и многое другое.</p>
-    <p>Если вы хотите, чтобы ваш бренд выделялся на фоне конкуренции, обращайтесь ко мне за помощью. 
-      Я гарантирую, что моя услуга поможет вам достичь успеха и привлечь больше клиентов.
-    </p>
-  </section>
-
-  <section class="inform__profile">
+    <div class="exp__profile">
+      <span>Studio, старший дизайнер UX/UI</span>
+      <span>2019-2023</span>
+    </div>
+    <hr>
+    <div class="exp__profile">
+      <span>Studio, младший дизайнер UX/UI</span>
+      <span>2014-2019</span>
+    </div>
+  </div> {% endcomment %}
+  <div class="expLangs__profile">
     <div class="h5__with__pancil">
-      <h5>Образование</h5>
-      <img src="./img/fi-rr-pencil (1).png" alt="">
+      <h5>Языки</h5>
+      {% comment %} <img src="{% static 'img/fi-rr-pencil (1).png' %}" alt=""> {% endcomment %}
     </div>
-    <span>Институт дизайна</span>
-  </section>
-
-  <section class="inform__profile">
-    <div class="h5__with__pancil">
-      <h5>Лицензии и сертификаты</h5>
-      <img src="./img/fi-rr-pencil (1).png" alt="">
+    <div class="lang__profile">
+      {{form.languages}}
     </div>
-    <span>Сертификат Google Design</span>
-    <div class="addFile__profile">
-      <img src="./img/Button container.svg" alt="">
-      <span>Сертификат</span>
-    </div>
-  </section>
+    <hr>
+  </div>
+</section>
 
-  <section class="inform__profile">
-    <div class="h5__with__pancil">
-      <h5>Награды</h5>
-      <img src="./img/fi-rr-pencil (1).png" alt="">
-    </div>
-    <span>Нет данных</span>
-  </section>
+<section class="inform__profile">
+  <div class="h5__with__pancil">
+    <h5>Информация о 
+      {% if user.first_name %}
+      {{user.first_name}}
+      {% else %}
+      {{user.username|capfirst}}
+      {% endif %}
+    </h5>
+    <img src="./img/fi-rr-pencil (1).png" alt="">
+  </div>
+  <p>{{form.personal_info}}
+  </p>
+</section>
 
-  <section class="inform__profile">
-    <div class="h5__with__pancil">
-      <h5>Добавить резюме</h5>
-      <img src="./img/fi-rr-pencil (1).png" alt="">
-    </div>
-    <div class="addFile__profile">
-      <img src="./img/Button container.svg" alt="">
-      <span>CV</span>
-    </div>
-  </section>
+<section class="inform__profile">
+  <div class="h5__with__pancil">
+    <h5>Образование</h5>
+    <img src="./img/fi-rr-pencil (1).png" alt="">
+  </div>
+  <span>{{form.education}}</span>
+</section>
 
-  <footer>
-      <div class="w6One">
-          <img class="footerLogo" src="./img/logo.png" alt="">
-          <div class="w6PayMe">
-              <img src="./img/visa.svg" alt="">
-              <img src="./img/unionpay.svg" alt="">
-              <img src="./img/mastercard.svg" alt="">
-          </div>
-          <div class="w6CMMCopy">
-              <span>Follow us:</span>
-              <img src="./img/instagram.svg" alt="">
-              <img src="./img/telegram.svg" alt="">
-              <img src="./img/youtube.svg" alt="">
-              <img src="./img/linkedin.svg" alt="">
-          </div>
-          <span>Copyright© TEHNIKUM SCHOOL LLC. All rights reserved.</span>
-      </div>
-      <div class="w6Two">
-          <div class="pages">
-            <a href="./project__orders.html"><span>Проекты</span></a>
-            <a href="./project__specialists.html"><span>Специалисты</span></a>
-            <a href="#"><span>Помощь</span></a>
-          </div>
-          <div class="w6CMM">
-              <span>Follow us:</span>
-              <img src="./img/instagram.svg" alt="">
-              <img src="./img/telegram.svg" alt="">
-              <img src="./img/youtube.svg" alt="">
-              <img src="./img/linkedin.svg" alt="">
-          </div>
-      </div>
-  </footer>
+<input type="submit" value='Сохранить'>
+</form>
 
-
-  <script src="./js/script.js"></script>
-</body>
-</html>
+{% endblock content %}
