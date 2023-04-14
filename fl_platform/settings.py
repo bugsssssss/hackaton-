@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -137,10 +137,10 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
     # # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.instagram.InstagramOAuth2'
+    # 'social_core.backends.instagram.InstagramOAuth2'
 ]
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
@@ -152,3 +152,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '3456439644617573'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c03d827e9e3f539804b7ea71f49c1ca4'
+
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Mux0NAaJ09hp9z6sBXgOxuEGmlte9kHFDaUVRDp4qFyDDuE2JkPejPjRq4CSeRXxYEv0tZkHwDsdq4w93Q4KtT8001QNSfd6U'
+STRIPE_SECRET_KEY = 'sk_test_51Mux0NAaJ09hp9z61GpBdyrvxwWya2AENpZxHyVmHxGZWISh2ivQ7Bjz9HYJELCgk96Fx3tVsTJ0gvu2F32Mb6ch00GChY8GYu'
