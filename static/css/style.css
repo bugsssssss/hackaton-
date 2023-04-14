@@ -1003,7 +1003,21 @@ a.activeNumber__projects {
   line-height: 22px;
   color: #222222;
 }
-.form__t3 input {
+
+
+.budget_input {
+  padding: 0 15px;
+  margin-top: 15px;
+  width: 300px;
+  height: 44px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  background: #FFFFFF;
+  border: 1px solid #9CA3AF;
+  border-radius: 7px;
+}
+.form__t3 input, select {
   padding: 0 15px;
   margin-top: 15px;
   width: 300px;
@@ -1291,8 +1305,12 @@ a.activeNumber__projects {
   flex-direction: column-reverse;
   gap: 10px;
   color: #6B7280;
+  padding: 15px;
+  overflow-y: scroll;
 }
+
 .speakRight {
+  position: relative;
   align-self: flex-end;
   margin: 0;
   padding: 11px 20px;
@@ -1310,6 +1328,7 @@ div .speakRight img{
   height: 48px;
 }
 .speakLeft {
+  position: relative;
   align-self: flex-start;
   margin: 0;
   padding: 11px 20px;
@@ -1343,6 +1362,7 @@ div .speakRight img{
   margin-top: 10px;
   background-color: #F5F5F5;
   border-radius: 0.6em;
+  width: 100%;
 }
 .messagesServesLeft input::placeholder{
   font-weight: 500;
@@ -1573,12 +1593,34 @@ div .speakRight img{
 }
 .targetSendPrimaryRight .primary{
   padding: 10px 3em;
+
 }
 .targetSendPrimaryRight a{
   text-decoration: none;
 }
 
 
+/* ? */
+.serviceImg {
+  max-width: 141px;
+  max-height: 141px;
+}
+
+.userActive {
+  color: #fff;
+  padding: 8px 15px;
+  background: #3274FF;
+  border-radius: 7px;
+}
+
+.messageTime {
+  font-size: 12px;
+  line-height: 16px;
+  color: #6B7280;
+  /* position: absolute;
+  bottom: -30px;
+  right: 0; */
+}
 
 @media (max-width: 446px) {
   .primary.target {
